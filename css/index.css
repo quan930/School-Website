@@ -1,0 +1,46 @@
+.navigation{/*边距*/
+    padding: 0px;
+}
+.border{/*边框*/
+    box-shadow: 0px 0px 1px 2px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+}
+.border2{
+    border-radius: 30px;
+}
+#head{
+    background: url("../image/bj.jpg");
+}
+#content{
+    background: url("../image/bakeground.jpg");
+}
+#content a{
+    margin-left: 50px;
+    color: red;
+}
+#backs a{
+    float: right;
+    color: black;
+}
+#CERTEN li{
+    border-bottom: gainsboro dashed;
+    margin-top: 6px
+}
+a{
+    color: black;
+    text-decoration: none;
+}
+#footNavigation{
+    width: 100%;
+    background-color: #E5E5E5;
+}
+#main{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+#foot{
+    background-color: #BE403A;
+    padding: 1px;
+    text-align: center;
+    margin: 0px;
+    font-size: 20%;
+}
