@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- import Vue before Element -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <style>
+        .navigation{/*边距*/
+            padding: 0px;
+        }
+        .border{/*边框*/
+            box-shadow: 0px 0px 1px 2px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+        }
+        .border2{
+            border-radius: 30px;
+        }
+        #head{
+            background: url("image/bj.jpg");
+        }
+        #content{
+            background: url("image/bakeground.jpg");
+        }
+        #content a{
+            margin-left: 50px;
+            color: red;
+        }
+        #backs a{
+            float: right;
+            color: black;
+        }
+        #CERTEN li{
+            border-bottom: gainsboro dashed;
+            margin-top: 6px
+        }
+        a{
+            color: black;
+            text-decoration: none;
+        }
+        #footNavigation{
+            width: 100%;
+            background-color: #E5E5E5;
+        }
+        #main{
+            margin-bottom: 0px;
+            padding-bottom: 0px;
+        }
+        #foot{
+            background-color: #BE403A;
+            padding: 1px;
+            text-align: center;
+            margin: 0px;
+            font-size: 20%;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <el-container>
+        <el-header height="110px">
+            <el-row id="head" height="110px">
+                <el-col :span="7" :offset="2"><div><img style="height:100%" src="image/logo.png"></div></el-col>
+                <el-col :span="13">
+                    <el-container>
+                        <el-header height="50px">
+                            <div style="height:100%;float: right;margin-top: 10px;">
+                                <a style="color: black" href="https://secure.php.net/manual/zh/set.mysqlinfo.php">设为首页</a> | <a style="color: black" href="">加入收藏</a> | <a style="color: black" href="">网站导航</a> | <a style="color: red" href="">新站入口</a>
+                            </div>
+                        </el-header>
+                        <el-main class="navigation">
+                            <el-menu
+                                    :default-active="activeIndex2"
+                                    class="el-menu-demo"
+                                    mode="horizontal"
+                                    @select="handleSelect"
+                                    background-color="#BE403A"
+                                    text-color="#FFFFFF"
+                                    active-text-color="#ffffff">
+                                <el-menu-item index="1" disabled height="60px">首页</el-menu-item>
+                                <el-submenu index="2">
+                                    <template slot="title">学校概述</template>
+                                    <el-menu-item index="2-1">学校简介</el-menu-item>
+                                    <el-menu-item index="2-2">现任领导</el-menu-item>
+                                    <el-menu-item index="2-3">文化概念</el-menu-item>
+                                    <el-menu-item index="2-4">视觉识别系统</el-menu-item>
+                                    <el-menu-item index="2-5">学校地图</el-menu-item>
+                                    <el-menu-item index="2-6">图说辽金</el-menu-item>
+                                </el-submenu>
+                                <el-submenu index="3">
+                                    <template slot="title">机构设置</template>
+                                    <el-menu-item index="3-1">党政管理机构</el-menu-item>
+                                    <el-menu-item index="3-2">教学机构</el-menu-item>
+                                    <el-menu-item index="3-3">后勤辅助机构</el-menu-item>
+                                </el-submenu>
+                                <el-submenu index="4">
+                                    <template slot="title">人才培养</template>
+                                    <el-menu-item index="4-1">教学工作</el-menu-item>
+                                    <el-menu-item index="4-2">学生工作</el-menu-item>
+                                    <el-menu-item index="4-3">继续教育</el-menu-item>
+                                </el-submenu>
+                                <el-menu-item index="5">科研管理</el-menu-item>
+                                <el-submenu index="6">
+                                    <template slot="title">招生就业</template>
+                                    <el-menu-item index="6-1">招生网</el-menu-item>
+                                    <el-menu-item index="6-2">就业网</el-menu-item>
+                                    <el-menu-item index="6-3">校企合作</el-menu-item>
+                                </el-submenu>
+                                <el-submenu index="7">
+                                    <template slot="title">公共服务</template>
+                                    <el-menu-item index="7-1">校园黄页</el-menu-item>
+                                    <el-menu-item index="7-2">图书馆</el-menu-item>
+                                    <el-menu-item index="7-3">信息公开</el-menu-item>
+                                    <el-menu-item index="7-4">后勤服务</el-menu-item>
+                                    <el-menu-item index="7-5">校历</el-menu-item>
+                                    <el-menu-item index="7-6">OA系统</el-menu-item>
+                                    <el-menu-item index="7-7">站群后台</el-menu-item>
+                                </el-submenu>
+                            </el-menu>
+                        </el-main>
+                    </el-container>
+                </el-col>
+            </el-row>
+        </el-header>
+        <el-main id="main">
+            <el-row>
+                <template>
+                    <el-carousel :interval="4000" type="card" height="300px">
+                        <el-carousel-item v-for="(img,index) in imgList" :key="index">
+                            <img style="margin:0 auto;" height="100%" v-bind:src="img.url">
+                        </el-carousel-item>
+                    </el-carousel>
+                </template>
+            </el-row>
+            <el-row>
+                <el-col :span="14":offset="2">辽金要闻</el-col>
+                <el-col :span="5">通知公告</el-col>
+            </el-row>
+            <el-row :gutter="10">
+                <el-col :span="5":offset="2">
+                    <template>
+                        <div class="block border">
+                            <el-carousel height="290px">
+                                <el-carousel-item v-for="(simg,index) in smallImgList" :key="index">
+                                    <el-containe>
+                                        <el-header height="250px">
+                                            <img style="margin:0 auto;width:100%;height:100%;" v-bind:src="simg.url">
+                                        </el-header>
+                                        <el-main>
+                                            <span style="font-size: 30%;bottom:0px ">{{ simg.mes }}</span>
+                                        </el-main>
+                                    </el-containe>
+                                </el-carousel-item>
+                            </el-carousel>
+                        </div>
+                    </template>
+                </el-col>
+                <el-col :span="8">
+                    <div style="padding: 10px;height: 270px" id="CERTEN" class="border">
+                        <div id="content">
+                            <a href="#">王冠书记 白广申院长 2019年新年贺词</a >
+                        </div>
+                        <li><a href="#">我校召开2018年度领导班子民主生活会</a ></li>
+                        <li><a href="#">我校召开党委理论学习中心组（扩大）会议</a ></li>
+                        <li><a href="#">王冠书记在全国高职高专党委书记论坛上做交流报告</a ></li>
+                        <li><a href="#">2018年新入职教师培训工作圆满落幕</a ></li>
+                        <li><a href="#">我校组织全体师生收看庆祝改革开放40周年大会直播</a ></li>
+                        <li><a href="#">我校召开2018年度党组织书记抓基层党建工作述职评议会</a ></li>
+                        <li><a href="#">我校成功举办2018年消防应急疏散演练</a ></li>
+                        <li><a href="#">校党委书记王冠为学生上形势与政策课</a ></li>
+                    </div>
+                </el-col>
+                <el-col :span="6" :offset="1">
+                    <div class="border" style="height: 290px;width: 100%;margin-bottom: 10px">
+                        <el-timeline>
+                            <el-timeline-item timestamp="2019/3/4" placement="top">
+                                <div style="width: 70%;padding: 5px" class="border2 border">
+                                    <li><a href="#">会议安排</a ></li>
+                                </div>
+                            </el-timeline-item>
+                            <el-timeline-item timestamp="2019/2/25" placement="top">
+                                <div style="width: 70%;padding: 5px" class="border2 border">
+                                    <li><a href="#">会议安排</a ></li>
+                                </div>
+                            </el-timeline-item>
+                            <el-timeline-item timestamp="2018/12/28" placement="top">
+                                <div style="width: 70%;padding: 5px" class="border2 border">
+                                    <li><a href="#">年会</a ></li>
+                                </div>
+                            </el-timeline-item>
+                            <el-timeline-item timestamp="2018/12/12" placement="top">
+                                <div style="width: 70%;padding: 5px" class="border2 border">
+                                    <li><a href="#">采购公告</a ></li>
+                                </div>
+                            </el-timeline-item>
+                        </el-timeline>
+                    </div>
+                </el-col>
+            </el-row>
+            <el-row >
+                <el-col :span="20" :offset="2">
+                    <el-row id="footNavigation">
+                        <el-col :span="3":offset="3">
+                            <div>
+                                <h3>&nbsp;&nbsp;&nbsp;学校概况</h3>
+                                <ul>
+                                    <li><a href="#">学校简介</a ></li>
+                                    <li><a href="#">现任领导</a ></li>
+                                    <li><a href="#">文化理念</a ></li>
+                                    <li><a href="#">视觉识别系统</a ></li>
+                                    <li><a href="#">学校地图</a ></li>
+                                    <li><a href="#">图说辽金</a ></li>
+                                </ul>
+                            </div>
+                        </el-col>
+                        <el-col :span="3">
+                            <div>
+                                <h3>&nbsp;&nbsp;&nbsp;机构设置</h3>
+                                <ul>
+                                    <li><a href="#">党政管理机构</a ></li>
+                                    <li><a href="#">教学机构</a ></li>
+                                    <li><a href="#">后勤辅助机构</a ></li>
+                                </ul>
+                            </div>
+                        </el-col>
+                        <el-col :span="3">
+                            <div>
+                                <h3>&nbsp;&nbsp;&nbsp;人才培养</h3>
+                                <ul>
+                                    <li><a href="#">教学工作</a ></li>
+                                    <li><a href="#">学生工作</a ></li>
+                                    <li><a href="#">继续教育</a ></li>
+                                </ul>
+                            </div>
+                        </el-col>
+                        <el-col :span="3">
+                            <div>
+                                <h3>&nbsp;&nbsp;&nbsp;招生就业</h3>
+                                <ul>
+                                    <li><a href="#">招生信息</a ></li>
+                                    <li><a href="#">就业与创业</a ></li>
+                                </ul>
+                            </div>
+                        </el-col>
+                        <el-col :span="3">
+                            <div>
+                                <h3>&nbsp;&nbsp;&nbsp;合作交流</h3>
+                                <ul>
+                                    <li><a href="#">校企合作</a ></li>
+                                    <li><a href="#">国际交流</a ></li>
+                                </ul>
+                            </div>
+                        </el-col>
+                        <el-col :span="3">
+                            <div>
+                                <h3>&nbsp;&nbsp;&nbsp;公共服务</h3>
+                                <ul>
+                                    <li><a href="#">校园门户</a ></li>
+                                    <li><a href="#">图书馆</a ></li>
+                                    <li><a href="#">信息公开</a ></li>
+                                    <li><a href="#">后勤服务</a ></li>
+                                    <li><a href="#">校历</a ></li>
+                                    <li><a href="#">校园黄页</a ></li>
+                                </ul>
+                            </div>
+                        </el-col>
+                    </el-row>
+                </el-col>
+                </el-col>
+            </el-row>
+        </el-main>
+        <el-footer>
+            <el-col :span="20":offset="2">
+                <div id="foot">
+                    <span>辽宁金融职业学院 LIAONING FINANCE VOCATIONAL COLLEGE</span><br>
+                    <span>地址：沈北新区虎石台南大街38号 邮编：110122 招生电话：024－62299413 024－62837633</span><br>
+                    <span>版权所有©辽宁金融职业学院 辽ICP备14013604号-</span>
+                </div>
+            </el-col>
+        </el-footer>
+    </el-container>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            imgList:[
+                {
+                    url:"image/carousel06.jpg"
+                },
+                {
+                    url:"image/carousel07.jpg"
+                },
+                {
+                    url:"image/carousel09.jpg"
+                },
+                {
+                    url:"image/carousel08.jpg"
+                },
+                {
+                    url:"image/carousel05.jpg"
+                }
+            ],
+            smallImgList:[
+                {
+                    mes:"召开教学工作会议暨师德师风建设工作会议",
+                    url:"image/carousel_small_01.jpg"
+                },
+                {
+                    mes:"党委书记王冠教授给学生上“形势与政策”课",
+                    url:"image/carousel_small_02.jpg"
+                },
+                {
+                    mes: "我校召开思想政治工作推进会议",
+                    url:"image/carousel_small_03.jpg"
+                },
+                {
+                    mes: "我校召开2018年全面从严治党工作会议",
+                    url:"image/carousel_small_04.jpg"
+                }
+            ]
+        }
+    });
+</script>
+</html>
